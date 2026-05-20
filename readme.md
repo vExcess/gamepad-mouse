@@ -27,6 +27,8 @@ North Button (Y on xbox) -> middle click
 ## Build & Install
 gamepad-mouse uses jvbuild ([https://github.com/vExcess/jvbuild](https://github.com/vExcess/jvbuild)) as its build system.
 
+gamepad-mouse is written in Zig 0.15.2 ([https://ziglang.org/download/](https://ziglang.org/download/))
+
 ```sh
 # get source
 git clone https://github.com/vExcess/gamepad-mouse.git
