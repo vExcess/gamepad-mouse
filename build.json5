@@ -1,0 +1,40 @@
+{
+    name: "gamepad-mouse",
+    description: "Use your controller as a mouse",
+    author: "VExcess <github.com/vexcess>",
+    
+    modules: {
+        "gamepad-mouse": {
+            root: "./src/gamepad-mouse.zig",
+            version: "1.0.0",
+            dependencies: [
+                "X11",
+                "Xtst",
+                "libc"
+            ]
+        },
+
+        X11: {
+            type: "system:lib",
+            install: {
+                debian_ubuntu: "sudo apt install libx11-dev",
+            }
+        },
+
+        Xtst: {
+            type: "system:lib",
+            install: {
+                debian_ubuntu: "sudo apt install libxtst-dev",
+            }
+        },
+
+        libc: {
+            type: "system:lib",
+            install: {
+                debian_ubuntu: "sudo apt install libc6-dev",
+            }
+        },
+    },
+
+    default: "gamepad-mouse",
+}
