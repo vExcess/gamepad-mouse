@@ -73,7 +73,7 @@ const bindings = .{
 
 const DEADZONE: f32 = 0.01;
 const MOVE_SENSITIVITY: f32 = 10.0;
-const SCROLL_SENSITIVITY: f32 = 0.5;
+const SCROLL_SENSITIVITY: f32 = 0.4;
 const REFRESH_RATE = 60;
 
 fn normalizeJoystickInput(n: i32) f32 {
@@ -92,7 +92,7 @@ fn inputThread(file: std.fs.File, state: *State, display: *c.Display) void {
 
     while (true) {
         const bytesRead = file.read(std.mem.asBytes(&event)) catch |err| {
-            std.debug.print("Error reading device: {}\n", .{err});
+            std.debug.print("Error reading device (probably the controller disconnected): {}\n", .{err});
             break;
         };
 
@@ -194,6 +194,9 @@ pub fn main() !void {
     const thread = try std.Thread.spawn(.{}, inputThread, .{ file, &state, display.? });
     thread.detach();
 
+    var xScrollAccumulator: f32 = 0;
+    var yScrollAccumulator: f32 = 0;
+
     // update loop
     while (true) {
         state.mutex.lock();
@@ -228,11 +231,10 @@ pub fn main() !void {
 
         // do scrolling
         if (@abs(joyRight.x) > DEADZONE or @abs(joyRight.y) > DEADZONE) {
-            var xScrollAccumulator: f32 = 0;
-            var yScrollAccumulator: f32 = 0;
-
             xScrollAccumulator += joyRight.x * -SCROLL_SENSITIVITY;
             yScrollAccumulator += joyRight.y * -SCROLL_SENSITIVITY;
+
+            std.debug.print("{}\n", .{yScrollAccumulator});
 
             while (@abs(yScrollAccumulator) >= 1.0) {
                 const btn: c_uint = if (yScrollAccumulator > 0) X11MouseButton.ScrollUp else X11MouseButton.ScrollDown;

@@ -6,7 +6,7 @@
     modules: {
         "gamepad-mouse": {
             root: "./src/gamepad-mouse.zig",
-            version: "1.0.0",
+            version: "1.0.1",
             dependencies: [
                 "X11",
                 "Xtst",

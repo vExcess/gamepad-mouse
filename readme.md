@@ -1,6 +1,8 @@
 # gamepad-mouse
 Use your controller as a mouse.
 
+Demo: [https://www.youtube.com/watch?v=T4tdVj46XFc](https://www.youtube.com/watch?v=T4tdVj46XFc)
+
 ## Bindings
 Left Joystick -> mouse movement  
 Right Joystick -> mouse scrolling  
@@ -20,6 +22,7 @@ North Button (Y on xbox) -> middle click
 - Support displays faster than 60 FPS
 - Support user-modifiable config file
 - Support Wayland
+- Gracefully handle controller disconnects
 
 ## Build & Install
 gamepad-mouse uses jvbuild ([https://github.com/vExcess/jvbuild](https://github.com/vExcess/jvbuild)) as its build system.
